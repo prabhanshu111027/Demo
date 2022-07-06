@@ -1,0 +1,38 @@
+package com.example.demo.service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import org.springframework.stereotype.Service;
+
+import com.example.demo.OrderDetailsResponse;
+import com.example.demo.ResponceOrder;
+import com.example.demo.model.Order;
+
+@Service
+public class OrderMapperImpl implements OrderMapperService {
+
+	@Override
+	public OrderDetailsResponse mapOrderDetails(Order order) {
+		OrderDetailsResponse orderResponse = new OrderDetailsResponse();
+		orderResponse.setItemName(order.getItemName());
+		orderResponse.setPrice(order.getPrice());
+		return orderResponse;
+	}
+	
+	@Override
+	public ResponceOrder mapOrderDetails(Set<Order> orders, String customerName) {
+		List<OrderDetailsResponse> listOrders=new ArrayList();
+		for(Order order : orders) {
+		OrderDetailsResponse orderResponse = new OrderDetailsResponse();
+		orderResponse.setItemName(order.getItemName());
+		orderResponse.setPrice(order.getPrice());
+		orderResponse.setCustomer(customerName);
+		listOrders.add(orderResponse);
+		}
+		
+		return new ResponceOrder().setResponceOrders(listOrders);
+	}
+
+}

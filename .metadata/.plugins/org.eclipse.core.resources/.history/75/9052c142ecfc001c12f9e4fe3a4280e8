@@ -1,0 +1,16 @@
+package com.example.demo.model;
+
+import java.util.List;
+
+public class OrderWrapper {
+	private List<Order> content;
+
+	public List<Order> getContent() {
+		return content;
+	}
+
+	public void setContent(List<Order> content) {
+		this.content = content;
+	}
+	
+}

@@ -1,0 +1,36 @@
+package com.example.demo.controller;
+
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.OrderDetailsResponse;
+import com.example.demo.model.Order;
+import com.example.demo.service.OrderMapperService;
+import com.example.demo.service.OrderServiceImpl;
+@RestController
+public class OrderController {
+	
+@Autowired
+ private   OrderServiceImpl orderServiceImpl;
+
+@Autowired
+private OrderMapperService mapperService;
+
+@PostMapping(path = "/order")
+public ResponseEntity<OrderDetailsResponse> placeorder(@RequestBody Order order) {
+
+    Order placedOrder = new Order(order.getId(), order.getItemName(), order.getQuantity(), order.getPrice());
+
+    orderServiceImpl.createOrder(order);
+
+    return new ResponseEntity<>(mapperService.mapOrderDetails(placedOrder), HttpStatus.OK);
+}
+
+}

@@ -1,0 +1,19 @@
+package com.example.demo.service;
+
+import org.springframework.stereotype.Service;
+
+import com.example.demo.OrderDetailsResponse;
+import com.example.demo.model.Order;
+
+@Service
+public class OrderMapperImpl implements OrderMapperService {
+
+	@Override
+	public OrderDetailsResponse mapOrderDetails(Order order) {
+		OrderDetailsResponse orderResponse = new OrderDetailsResponse();
+		orderResponse.setItemName(order.getItemName());
+		orderResponse.setPrice(order.getPrice());
+		return orderResponse;
+	}
+
+}

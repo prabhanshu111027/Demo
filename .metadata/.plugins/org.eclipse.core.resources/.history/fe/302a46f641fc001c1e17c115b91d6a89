@@ -1,0 +1,53 @@
+package com.example.demo.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.OrderDetailsResponse;
+import com.example.demo.model.Order;
+import com.example.demo.service.OrderMapperService;
+import com.example.demo.service.OrderServiceImpl;
+
+@RestController
+public class OrderController {
+
+	@Autowired
+	private OrderServiceImpl orderServiceImpl;
+
+	@Autowired
+	private OrderMapperService mapperService;
+
+	@PostMapping(path = "/order")
+	public ResponseEntity<OrderDetailsResponse> placeorder(@RequestBody Order order) {
+
+		Order placedOrder = new Order(order.getId(), order.getItemName(), order.getQuantity(), order.getPrice());
+
+		orderServiceImpl.createOrder(placedOrder);
+
+		return new ResponseEntity<>(mapperService.mapOrderDetails(placedOrder), HttpStatus.OK);
+	}
+
+	/*
+	 * @RequestMapping(method = RequestMethod.POST, value = "/order", consumes =
+	 * "application/json", produces = "application/json") public @ResponseBody
+	 * ResponseEntity<?> saveOrderList(@RequestBody Resource<OrderWrapper<Order>>
+	 * orderWrapper, PersistentEntityResourceAssembler assembler) { Resources<Order>
+	 * resources = new Resources<Person>(repo.save(personWrapper.getContent()));
+	 * //TODO add extra links `assembler` return ResponseEntity.ok(resources); }
+	 */
+	
+//	@RequestMapping(value = "/orders", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+//	public @ResponseBody List<Order> batchCreate(@RequestBody List<Order> orders) {
+//	  return orderServiceImpl.create(orders);
+//	}
+}

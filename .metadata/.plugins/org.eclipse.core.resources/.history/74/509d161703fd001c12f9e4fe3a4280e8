@@ -1,0 +1,14 @@
+package com.example.demo.service;
+
+import java.util.Set;
+
+import com.example.demo.model.ResponceOrder;
+import com.example.demo.exception.OrderAlreadyExistsException;
+import com.example.demo.model.Order;
+
+public interface OrderService {
+	 boolean isExist(Order order);
+	public void createOrder(Order o) throws OrderAlreadyExistsException;
+	public ResponceOrder filterOrderDetails(Set<Order> order, String customerName);
+	
+}

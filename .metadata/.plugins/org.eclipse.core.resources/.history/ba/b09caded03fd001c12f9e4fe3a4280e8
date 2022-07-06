@@ -1,0 +1,5 @@
+package com.example.demo.exception;
+@ControllerAdvice
+public class GlobalExceptionHandler {
+
+}

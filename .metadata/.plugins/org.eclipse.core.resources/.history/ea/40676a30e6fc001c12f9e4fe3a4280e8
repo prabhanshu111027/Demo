@@ -1,0 +1,26 @@
+package com.example.demo.service;
+
+import java.util.HashSet;
+
+import org.springframework.stereotype.Service;
+
+import com.example.demo.model.Order;
+
+@Service
+public class OrderServiceImpl implements OrderService {
+
+	HashSet<Order> orderList = new HashSet<Order>();
+
+	@Override
+	public void createOrder(Order o) {
+		orderList.add(o);
+
+	}
+
+	public HashSet<Order> getOrderList() {
+
+		return orderList;
+
+	}
+
+}

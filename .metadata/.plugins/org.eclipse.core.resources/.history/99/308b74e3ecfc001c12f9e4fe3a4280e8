@@ -1,0 +1,12 @@
+package com.example.demo.service;
+
+import java.util.Set;
+
+import com.example.demo.ResponceOrder;
+import com.example.demo.model.Order;
+
+public interface OrderService {
+	void createOrder(Order o);
+	public ResponceOrder filterOrderDetails(Set<Order> order, String customerName);
+
+}
